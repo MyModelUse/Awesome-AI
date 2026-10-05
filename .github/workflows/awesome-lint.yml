@@ -1,0 +1,19 @@
+name: Awesome Lint
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 10 * *'
+
+jobs:
+  awesome-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Run awesome-lint
+        run: npx --yes awesome-lint README.md

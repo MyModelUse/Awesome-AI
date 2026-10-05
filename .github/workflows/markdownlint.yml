@@ -1,0 +1,19 @@
+name: Markdownlint
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 10 * *'
+
+jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Run markdownlint-cli2
+        run: npx --yes markdownlint-cli2 --config ".github/markdownlint-cli2.jsonc" "**/*.md" "#node_modules"
